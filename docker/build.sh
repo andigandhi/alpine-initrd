@@ -2,11 +2,16 @@
 
 set -e
 
-ALPINE_VERSION="v3.4"
+ALPINE_VERSION="edge"
 ROOTDIR="/alpine"
 
-apk --arch x86_64 -X http://dl-cdn.alpinelinux.org/alpine/${ALPINE_VERSION}/main/ -U --allow-untrusted --root ${ROOTDIR} --initdb add alpine-base openssh ethtool
+apk --arch x86_64 -X http://dl-cdn.alpinelinux.org/alpine/${ALPINE_VERSION}/main/ -U --allow-untrusted --root ${ROOTDIR} --initdb add alpine-base openssh ethtool ruby ruby-libs musl fuse-common mbedtls
+apk --arch x86_64 -X http://dl-cdn.alpinelinux.org/alpine/${ALPINE_VERSION}/community/ -U --allow-untrusted --root ${ROOTDIR} --initdb add fuse
+apk --arch x86_64 -X http://dl-cdn.alpinelinux.org/alpine/${ALPINE_VERSION}/testing/ -U --allow-untrusted --root ${ROOTDIR} --initdb add dislocker-libs dislocker
 cp /etc/apk/repositories $ROOTDIR/etc/apk/
+
+# Only for debugging
+# echo "nameserver 9.9.9.9" > $ROOTDIR/etc/resolv.conf
 
 # boot
 for d in hostname procfs sysfs urandom hwdrivers; do
