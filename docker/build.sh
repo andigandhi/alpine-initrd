@@ -6,7 +6,7 @@ ALPINE_VERSION="edge"
 ROOTDIR="/alpine"
 
 apk --arch x86_64 -X http://dl-cdn.alpinelinux.org/alpine/${ALPINE_VERSION}/main/ -U --allow-untrusted --root ${ROOTDIR} --initdb add alpine-base openssh ethtool ruby ruby-libs musl fuse-common mbedtls ntfs-3g
-apk --arch x86_64 -X http://dl-cdn.alpinelinux.org/alpine/${ALPINE_VERSION}/community/ -U --allow-untrusted --root ${ROOTDIR} --initdb add fuse
+apk --arch x86_64 -X http://dl-cdn.alpinelinux.org/alpine/${ALPINE_VERSION}/community/ -U --allow-untrusted --root ${ROOTDIR} --initdb add fuse chntpw
 cp /etc/apk/repositories $ROOTDIR/etc/apk/
 
 # boot
